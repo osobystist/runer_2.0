@@ -1,0 +1,6 @@
+name: "main"
+collection_instances {
+  id: "ground"
+  collection: "/main/ground.collection"
+}
+scale_along_z: 0
