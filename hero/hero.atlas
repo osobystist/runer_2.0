@@ -1,0 +1,121 @@
+images {
+  image: "/hero/hero_img/crosshair.png"
+}
+images {
+  image: "/hero/hero_img/eye-indifferent.png"
+}
+images {
+  image: "/hero/hero_img/eye-surprised.png"
+}
+images {
+  image: "/hero/hero_img/front-bracer.png"
+}
+images {
+  image: "/hero/hero_img/front-fist-closed.png"
+}
+images {
+  image: "/hero/hero_img/front-fist-open.png"
+}
+images {
+  image: "/hero/hero_img/front-foot.png"
+}
+images {
+  image: "/hero/hero_img/front-shin.png"
+}
+images {
+  image: "/hero/hero_img/front-thigh.png"
+}
+images {
+  image: "/hero/hero_img/front-upper-arm.png"
+}
+images {
+  image: "/hero/hero_img/goggles.png"
+}
+images {
+  image: "/hero/hero_img/gun.png"
+}
+images {
+  image: "/hero/hero_img/head.png"
+}
+images {
+  image: "/hero/hero_img/hoverboard-board.png"
+}
+images {
+  image: "/hero/hero_img/hoverboard-thruster.png"
+}
+images {
+  image: "/hero/hero_img/hoverglow-small.png"
+}
+images {
+  image: "/hero/hero_img/mouth-grind.png"
+}
+images {
+  image: "/hero/hero_img/mouth-oooo.png"
+}
+images {
+  image: "/hero/hero_img/mouth-smile.png"
+}
+images {
+  image: "/hero/hero_img/muzzle-glow.png"
+}
+images {
+  image: "/hero/hero_img/muzzle-ring.png"
+}
+images {
+  image: "/hero/hero_img/muzzle01.png"
+}
+images {
+  image: "/hero/hero_img/muzzle02.png"
+}
+images {
+  image: "/hero/hero_img/muzzle03.png"
+}
+images {
+  image: "/hero/hero_img/muzzle04.png"
+}
+images {
+  image: "/hero/hero_img/muzzle05.png"
+}
+images {
+  image: "/hero/hero_img/neck.png"
+}
+images {
+  image: "/hero/hero_img/portal-bg.png"
+}
+images {
+  image: "/hero/hero_img/portal-flare1.png"
+}
+images {
+  image: "/hero/hero_img/portal-flare2.png"
+}
+images {
+  image: "/hero/hero_img/portal-flare3.png"
+}
+images {
+  image: "/hero/hero_img/portal-shade.png"
+}
+images {
+  image: "/hero/hero_img/portal-streaks1.png"
+}
+images {
+  image: "/hero/hero_img/portal-streaks2.png"
+}
+images {
+  image: "/hero/hero_img/rear-bracer.png"
+}
+images {
+  image: "/hero/hero_img/rear-foot.png"
+}
+images {
+  image: "/hero/hero_img/rear-shin.png"
+}
+images {
+  image: "/hero/hero_img/rear-thigh.png"
+}
+images {
+  image: "/hero/hero_img/rear-upper-arm.png"
+}
+images {
+  image: "/hero/hero_img/torso.png"
+}
+extrude_borders: 2
