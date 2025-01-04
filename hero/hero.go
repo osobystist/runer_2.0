@@ -1,3 +1,7 @@
+components {
+  id: "hero"
+  component: "/hero/hero.script"
+}
 embedded_components {
   id: "spinemodel"
   type: "spinemodel"

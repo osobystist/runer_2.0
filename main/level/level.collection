@@ -1,0 +1,26 @@
+name: "level"
+instances {
+  id: "hero"
+  prototype: "/hero/hero.go"
+  position {
+    x: 254.0
+    y: 52.0
+  }
+  scale3 {
+    x: 0.858998
+    y: 0.876806
+  }
+}
+collection_instances {
+  id: "ground"
+  collection: "/main/level/ground.collection"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "controller"
+  data: "components {\n"
+  "  id: \"controller\"\n"
+  "  component: \"/main/level/controller.script\"\n"
+  "}\n"
+  ""
+}

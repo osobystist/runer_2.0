@@ -1,7 +1,0 @@
-images {
-  image: "/images/ground01.png"
-}
-images {
-  image: "/images/ground02.png"
-}
-extrude_borders: 2

@@ -18,3 +18,9 @@ function update(self, dt) -- <3>
 		go.set_position(pos, p) -- <7>
 	end
 end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("set_speed") then -- <1>
+		self.speed = message.speed -- <2>
+	end
+end

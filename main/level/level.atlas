@@ -1,0 +1,10 @@
+images {
+  image: "/main/level/images/ground01.png"
+}
+images {
+  image: "/main/level/images/ground02.png"
+}
+images {
+  image: "/main/level/images/rock_planks.png"
+}
+extrude_borders: 2
