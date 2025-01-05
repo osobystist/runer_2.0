@@ -1,7 +1,3 @@
-components {
-  id: "platform"
-  component: "/main/level/objects/platform.script"
-}
 embedded_components {
   id: "sprite"
   type: "sprite"
@@ -12,9 +8,6 @@ embedded_components {
   "  texture: \"/main/level/level.atlas\"\n"
   "}\n"
   ""
-  position {
-    x: 1.0
-  }
 }
 embedded_components {
   id: "collisionobject"
@@ -29,35 +22,15 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
-  "      x: 175.0\n"
-  "      y: -1.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
   "    index: 0\n"
   "    count: 3\n"
   "  }\n"
-  "  data: 368.85138\n"
-  "  data: 76.65338\n"
+  "  data: 195.70436\n"
+  "  data: 75.766205\n"
   "  data: 10.0\n"
   "}\n"
   ""
-}
-embedded_components {
-  id: "sprite1"
-  type: "sprite"
-  data: "default_animation: \"rock_planks\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "size {\n"
-  "  x: 391.0\n"
-  "  y: 153.0\n"
-  "}\n"
-  "textures {\n"
-  "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/main/level/level.atlas\"\n"
-  "}\n"
-  ""
-  position {
-    x: 350.0
-  }
 }
