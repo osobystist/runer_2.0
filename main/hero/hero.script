@@ -19,6 +19,24 @@ function final(self)
 	msg.post('.', 'release_input_focus')
 end
 
+local function play_animation(self, anim)
+	if self.anim ~= anim then
+		local anim_props = { bland_duration = 0.15 } --anim_props - анімаційний реквізит
+		spine.play_anim('#spinemodel', anim, go.PLAYBACK_LOOP_FORWARD, anim_props)
+		self.anim = anim
+	end
+end
+
+local function update_animation(self)
+	-- make sure the right animation is playing
+	if self.ground_contact then
+		play_animation(self, hash("run"))
+	else
+		play_animation(self, hash("jump"))
+
+	end
+end
+
 function update(self, dt)
 	local gravity = vmath.vector3(0, gravity, 0)
 
@@ -30,6 +48,8 @@ function update(self, dt)
 	-- застосувати вектор швидкості до персонажа гравця
 	go.set_position(go.get_position() + self.velocity * dt)
 
+	update_animation(self)
+	
 	self.correction = vmath.vector3()
 	self.ground_contact = false
 end
@@ -63,6 +83,16 @@ local function handle_geometry_contact(self, normal, distance)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash('reset') then
+		self.velocity = vmath.vector3()
+		self.correction = vmath.vector3()
+		self.ground_contact = false
+		self.anim = nil
+		go.set('.', 'eulez.z', 0)
+		go.set_position(self.position)
+		msg.post("#collisionobject", "enable")
+	elseif message_id == hash('contact_point_response') then
+		
 	-- перевірте, чи отримали ми повідомлення контактної точки. Одне повідомлення для кожної контактної точки
 	if message_id == hash('contact_point_response') then
 		if message.group == hash('geometry') then

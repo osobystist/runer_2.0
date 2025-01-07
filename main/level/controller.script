@@ -17,11 +17,11 @@ function update(self, dt)
 	
 
 
-	if math.random > 0.2 then
+	if math.random() > 0.2 then
 		local h = platorm_heights[math.random(#platorm_heights)]
-		local f = '#platorm_factory'
-		if math.random > 0.5 then
-			f = '#platorm_long_factory'
+		local f = '#platform_factory'
+		if math.random() > 0.5 then
+			f = '#platform_long_factory'
 		end
 		local p = factory.create(f, vmath.vector3(1600, h, 0), nil, {}, 0.6)
 		msg.post(p, 'set_speed', {speed = self.speed} )
