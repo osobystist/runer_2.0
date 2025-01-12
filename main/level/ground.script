@@ -9,7 +9,7 @@ function init(self) -- <2>
 end
 
 function update(self, dt) -- <3>
-	for i, p in ipairs(pieces) do -- <4>
+	for i, p in ipairs(pieces) do 
 		local pos = go.get_position(p)
 		if pos.x <= -228 then -- <5>
 			pos.x = 1368 + (pos.x + 228)
@@ -24,3 +24,9 @@ function on_message(self, message_id, message, sender)
 		self.speed = message.speed -- <2>
 	end
 end
+--цей скрип в циклі фор перебирає елементи з таблиці шматочки за допомогою ipairs(pieces) записує у змінну р елементи 
+--таблиці pieces. Поті встановлюється положення кожного елемента (в змінній р) за допомогою local pos = go.get_position(p)
+-- перевіряється, чи не вийшов елемент за межі екрану і якщо вийшов, повертаємо його в початок екрану._G
+-- змінюємо позицію елемента кожен кадр на мінус self.speed * dt, встановлюємо йому нову позицію go.set_position(pos, p)
+-- де рос - позиція, р - назва елементу._G
+-- в рядках 22-26 якщо отримуємо нове значення self.speed - змінюємо його на це значення!.

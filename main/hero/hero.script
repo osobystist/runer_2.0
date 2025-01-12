@@ -6,13 +6,13 @@ local jump_takeoff_speed = 900
 
 function init(self)
 	msg.post('.', 'acquire_input_focus')
-	
+	msg.post("#", "reset")
 	-- зберегти стартову позицію
 	self.position = go.get_position()
 
 	-- відслідковувати вектор руху та наявність контакту з землею
-	self.velocity = vmath.vector3(0, 0, 0)
-	self.ground_contact = false
+	-- self.velocity = vmath.vector3(0, 0, 0)
+	-- self.ground_contact = false
 end
 
 function final(self)
@@ -88,14 +88,23 @@ function on_message(self, message_id, message, sender)
 		self.correction = vmath.vector3()
 		self.ground_contact = false
 		self.anim = nil
-		go.set('.', 'eulez.z', 0)
+		go.set('.', 'euler.z', 0)
 		go.set_position(self.position)
 		msg.post("#collisionobject", "enable")
-	elseif message_id == hash('contact_point_response') then
 		
-	-- перевірте, чи отримали ми повідомлення контактної точки. Одне повідомлення для кожної контактної точки
-	if message_id == hash('contact_point_response') then
-		if message.group == hash('geometry') then
+	elseif message_id == hash("contact_point_response") then
+		-- check if we received a contact point message
+		if message.group == hash("danger") then
+			-- Die and restart
+			play_animation(self, hash("death"))
+			msg.post("#collisionobject", "disable")
+			-- <1>
+			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
+			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,
+			function()
+				msg.post("controller#controller", "reset")
+			end)
+		elseif message.group == hash("geometry") then
 			handle_geometry_contact(self, message.normal, message.distance)
 		end
 	end
