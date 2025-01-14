@@ -25,6 +25,7 @@ embedded_components {
   "group: \"hero\"\n"
   "mask: \"geometry\"\n"
   "mask: \"danger\"\n"
+  "mask: \"pickup\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"

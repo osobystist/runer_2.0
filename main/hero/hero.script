@@ -93,18 +93,21 @@ function on_message(self, message_id, message, sender)
 		go.set('.', 'euler.z', 0)
 		go.set_position(self.position)
 		msg.post("#collisionobject", "enable")
-		
+		print(go.get_id("#collisionobject"))
 	elseif message_id == hash("contact_point_response") then
 		-- check if we received a contact point message
 		if message.group == hash("danger") then
 			-- Die and restart
+			print('повідомлення отримав, має відключитись коліженобджект')
 			play_animation(self, hash("death"))
+			print(go.get_id("#collisionobject"))
 			msg.post("#collisionobject", "disable")
 			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
 			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,
 			function()
 				msg.post("controller#controller", "reset")
 			end)
+			
 		elseif message.group == hash("geometry") then
 			handle_geometry_contact(self, message.normal, message.distance)
 		end

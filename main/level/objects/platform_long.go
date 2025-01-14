@@ -195,3 +195,9 @@ embedded_components {
   "}\n"
   ""
 }
+embedded_components {
+  id: "factory"
+  type: "factory"
+  data: "prototype: \"/main/level/coin.go\"\n"
+  ""
+}

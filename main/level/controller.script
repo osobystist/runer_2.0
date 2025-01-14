@@ -2,6 +2,7 @@ go.property('speed', 360)
 
 local grid = 460
 local platform_heights = { 100, 200, 350 }
+local coins = 3
 
 function init(self)
 	msg.post("ground/controller#ground", "set_speed", { speed = self.speed })
@@ -20,12 +21,17 @@ function update(self, dt)
 			-- в цьому коді обирається число випадкове яке буде індесом для масива platform_heights і за цим індексом оберетьчся 
 			--певне число з масива у випадковому порядку.
 			local f = '#platform_factory'
+			coins = coins * 2
 				if math.random() > 0.5 then
-					f = '#platform_long_factory'
+					f = '#platform_long_factory'				
 				end
 		
 		local p = factory.create(f, vmath.vector3(1600, h, 0), nil, {}, 0.6)
 		msg.post(p, 'set_speed', {speed = self.speed} )
+		table.insert(self.spawns, p)
+		msg.post(p, "set_speed", { speed = self.speed })
+		msg.post(p, "create_coins", { coins = coins })
+		table.insert(self.spawns, p)
 		end
 	end
 end
@@ -33,17 +39,14 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash('reset') then
-		print('контроллер отримав ресет')
 		msg.post('hero#hero', 'reset')
 		for i, p in ipairs(self.spawns) do
-			print(p, 'p до видалення')
 			go.delete(p)
-			print(p, 'p після видалення')
 		end
 		self.spawns = {}
 	elseif message_id == hash('delete_spawn') then
 		for i, p in ipairs(self.spawns) do
-			if p == message_id then
+			if p == message.id then
 				table.remove(self.spawns, i)
 				go.delete(p)
 			end

@@ -10,4 +10,7 @@ images {
 images {
   image: "/main/level/images/spikes.png"
 }
+images {
+  image: "/main/level/images/coin.png"
+}
 extrude_borders: 2
