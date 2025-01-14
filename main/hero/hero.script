@@ -21,7 +21,9 @@ end
 
 local function play_animation(self, anim)
 	if self.anim ~= anim then
-		local anim_props = { bland_duration = 0.15 } --anim_props - анімаційний реквізит
+		--створюється self.anim яка дорівнює nil і порівнюється з поточною анімацією.
+		local anim_props = { bland_duration = 0.15 } --anim_props - анімаційний реквізит, bland_duration - заздалегіть визначена властивість яку треба
+		-- передати у функцію spine.play_anim()
 		spine.play_anim('#spinemodel', anim, go.PLAYBACK_LOOP_FORWARD, anim_props)
 		self.anim = anim
 	end
@@ -33,7 +35,6 @@ local function update_animation(self)
 		play_animation(self, hash("run"))
 	else
 		play_animation(self, hash("jump"))
-
 	end
 end
 
@@ -84,6 +85,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash('reset') then
+		print('герой отримав ресет')
 		self.velocity = vmath.vector3()
 		self.correction = vmath.vector3()
 		self.ground_contact = false
@@ -98,7 +100,6 @@ function on_message(self, message_id, message, sender)
 			-- Die and restart
 			play_animation(self, hash("death"))
 			msg.post("#collisionobject", "disable")
-			-- <1>
 			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
 			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,
 			function()

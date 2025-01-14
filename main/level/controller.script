@@ -1,7 +1,7 @@
 go.property('speed', 360)
 
 local grid = 460
-local platorm_heights = { 100, 200, 350 }
+local platform_heights = { 100, 200, 350 }
 
 function init(self)
 	msg.post("ground/controller#ground", "set_speed", { speed = self.speed })
@@ -15,12 +15,14 @@ function update(self, dt)
 
 	if self.gridw >= grid then
 		self.gridw = 0
-	if math.random() > 0.2 then
-		local h = platorm_heights[math.random(#platorm_heights)]
-		local f = '#platform_factory'
-		if math.random() > 0.5 then
-			f = '#platform_long_factory'
-		end
+		if math.random() > 0.2 then
+			local h = platform_heights[math.random(#platform_heights)]
+			-- в цьому коді обирається число випадкове яке буде індесом для масива platform_heights і за цим індексом оберетьчся 
+			--певне число з масива у випадковому порядку.
+			local f = '#platform_factory'
+				if math.random() > 0.5 then
+					f = '#platform_long_factory'
+				end
 		
 		local p = factory.create(f, vmath.vector3(1600, h, 0), nil, {}, 0.6)
 		msg.post(p, 'set_speed', {speed = self.speed} )
@@ -31,9 +33,12 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash('reset') then
+		print('контроллер отримав ресет')
 		msg.post('hero#hero', 'reset')
 		for i, p in ipairs(self.spawns) do
+			print(p, 'p до видалення')
 			go.delete(p)
+			print(p, 'p після видалення')
 		end
 		self.spawns = {}
 	elseif message_id == hash('delete_spawn') then
