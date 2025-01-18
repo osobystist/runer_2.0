@@ -21,6 +21,7 @@ function update(self, dt)
 			-- в цьому коді обирається число випадкове яке буде індесом для масива platform_heights і за цим індексом оберетьчся 
 			--певне число з масива у випадковому порядку.
 			local f = '#platform_factory'
+			local coins = coins
 			coins = coins * 2
 				if math.random() > 0.5 then
 					f = '#platform_long_factory'
@@ -42,7 +43,9 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash('reset') then
 		msg.post('hero#hero', 'reset')
 		for i, p in ipairs(self.spawns) do
-			go.delete(p)
+			if go.exists(p) then
+				go.delete(p)
+			end
 		end
 		self.spawns = {}
 	elseif message_id == hash('delete_spawn') then
