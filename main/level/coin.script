@@ -7,6 +7,7 @@ function on_message(self, message_id, message, sender)
 	if self.collected == false and message_id == hash('collision_response') then
 		self.collected = true
 		msg.post('#sprite', 'disable')
+		msg.post("/gui#ui", "add_score", {score = 10})
 	elseif message_id == hash('start_animation') then
 		local pos = go.get_position()
 		go.animate(go.get_id(), "position.y", go.PLAYBACK_LOOP_PINGPONG, pos.y + 24, go.EASING_INOUTSINE, 0.75, message.delay)

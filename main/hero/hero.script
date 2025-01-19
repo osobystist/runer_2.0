@@ -59,13 +59,10 @@ local function handle_geometry_contact(self, normal, distance)
 	-- спроектувати вектор корекції на контактну нормаль
 	-- (вектор корекції є вектором 0 для першої контактної точки)
 	local proj = vmath.dot(self.correction, normal)
-	
 	-- розрахувати компенсацію, яку ми повинні зробити для цього контактного пункту
 	local comp = (distance - proj) * normal
-
 	-- додати його до вектора корекції
 	self.correction = self.correction + comp
-	
 	-- застосувати компенсацію до персонажа гравця
 	go.set_position(go.get_position() + comp)
 	-- перевірити, чи достатньо звичайних точок, щоб вважати гравця, що стоїть на землі
@@ -76,7 +73,6 @@ local function handle_geometry_contact(self, normal, distance)
 	--спроектуйте швидкість на нормаль
 	--proj - проєкція
 	proj  = vmath.dot(self.velocity, normal)
-	
 	-- якщо проекція негативна, це означає, що частина швидкості спрямована до точки контакту
 	if proj < 0 then
 		self.velocity = self.velocity - proj * normal
@@ -93,14 +89,17 @@ function on_message(self, message_id, message, sender)
 		go.set('.', 'euler.z', 0)
 		go.set_position(self.position)
 		msg.post("#collisionobject", "enable")
-		print(go.get_id("#collisionobject"))
+		-- print(go.get_id("#collisionobject"))
 	elseif message_id == hash("contact_point_response") then
+		-- print("Received contact_point_response from:", sender)
+		-- print("Message details:", message)
 		-- check if we received a contact point message
 		if message.group == hash("danger") then
 			-- Die and restart
+			print("Danger detected from:", sender, 'який має ід: ', message.other_id)
 			print('повідомлення отримав, має відключитись коліженобджект')
 			play_animation(self, hash("death"))
-			print(go.get_id("#collisionobject"))
+			-- print(go.get_id("#collisionobject"))
 			msg.post("#collisionobject", "disable")
 			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
 			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,

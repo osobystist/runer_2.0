@@ -187,7 +187,7 @@ embedded_components {
   }
 }
 embedded_components {
-  id: "danger_edges"
+  id: "danger"
   type: "collisionobject"
   data: "type: COLLISION_OBJECT_TYPE_KINEMATIC\n"
   "mass: 0.0\n"

@@ -4,3 +4,11 @@ collection_instances {
   collection: "/main/level/level.collection"
 }
 scale_along_z: 0
+embedded_instances {
+  id: "gui"
+  data: "components {\n"
+  "  id: \"ui\"\n"
+  "  component: \"/main/level/ui.gui\"\n"
+  "}\n"
+  ""
+}

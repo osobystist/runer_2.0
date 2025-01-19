@@ -31,7 +31,7 @@ function update(self, dt)
 		local p = factory.create(f, vmath.vector3(1600, h, 0), nil, {}, 0.6)
 		msg.post(p, 'set_speed', {speed = self.speed} )
 		table.insert(self.spawns, p)
-		msg.post(p, "set_speed", { speed = self.speed })
+		-- msg.post(p, "set_speed", { speed = self.speed })
 		msg.post(p, "create_coins", { coins = coins })
 		table.insert(self.spawns, p)
 		end

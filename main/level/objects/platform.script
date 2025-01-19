@@ -21,11 +21,11 @@ end
 function create_coins(self, params)
 	local spacing = 56
 	local pos = go.get_position()
-	local x = pos.x - params.coins * (spacing * 0.5) - 24
+	local x = pos.x - params.coins * (spacing * 0.22) - 24
 	--від поточної позиції по х віднімаємо певний params.coins помножений на 27 і потім віднімаємо ще 27
 	for i = 1, params.coins	do
 		--кожну ітерацію до і додається один, цикл виконується поки і ~=  params.coins
-		local coin = factory.create("#coin_factory", vmath.vector3(x + i * spacing , pos.y + 64, 1))
+		local coin = factory.create("#coin_factory", vmath.vector3(x + i * spacing , pos.y + 120, 1))
 		--  vmath.vector3(x + i * spacing , pos.y + 64, 1) - це позиція для кожної монети
 		msg.post(coin, "set_parent", { parent_id = go.get_id() }) -- <1>
 		msg.post(coin, "start_animation", { delay = i/10 }) -- <2>
