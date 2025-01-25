@@ -2,6 +2,10 @@ components {
   id: "hero"
   component: "/main/hero/hero.script"
 }
+components {
+  id: "hero_moove"
+  component: "/main/hero/hero_moove.script"
+}
 embedded_components {
   id: "spinemodel"
   type: "spinemodel"

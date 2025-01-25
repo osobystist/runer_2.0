@@ -2,13 +2,14 @@ local pieces = { "ground_1", "ground_2", "ground_3",
 "ground_4", "ground_5", "ground_6", "ground_7" }
 
 
-
+local dir = 'right'
 
 function init(self) -- <2>
 	self.speed = 360  -- Speed in pixels/s
 end
 
 function update(self, dt) -- <3>
+	if dir == 'right' then
 	for i, p in ipairs(pieces) do 
 		local pos = go.get_position(p)
 		if pos.x <= -228 then -- <5>
@@ -17,6 +18,7 @@ function update(self, dt) -- <3>
 		pos.x = pos.x - self.speed * dt -- <6>
 		go.set_position(pos, p) -- <7>
 	end
+end
 end
 
 function on_message(self, message_id, message, sender)

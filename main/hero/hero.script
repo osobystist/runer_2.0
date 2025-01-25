@@ -2,7 +2,7 @@
 local gravity = -20
 
 -- швидкість розльоту при стрибку в одиницях пікселів/с
-local jump_takeoff_speed = 900
+local jump_takeoff_speed = 990
 
 function init(self)
 	msg.post('.', 'acquire_input_focus')
@@ -34,7 +34,7 @@ local function update_animation(self)
 	if self.ground_contact then
 		play_animation(self, hash("run"))
 	else
-		play_animation(self, hash("jump"))
+		play_animation(self, hash("hoverboard"))
 	end
 end
 

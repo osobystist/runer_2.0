@@ -1,0 +1,60 @@
+function init(self)
+	msg.post('.', 'acquire_input_focus')
+
+	self.moving = false
+	self.firing = false
+
+	self.input = vmath.vector3()
+	self.dir = vmath.vector3(0, 1, 0)
+	self.speed = 360
+	
+end
+
+function final(self)
+	msg.post('.', 'release_input_focus')
+end
+
+function update(self, dt)
+	if self.moving then
+		local pos = go.get_position()
+		pos = pos + self.dir * self.speed * dt
+		go.set_position(pos)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+
+end
+
+function on_input(self, action_id, action)
+	-- Рух вліво
+	if action_id == hash("left") then
+		if action.pressed or action.repeated then
+			self.input.x = -1
+		elseif action.released then
+			self.input.x = 0
+		end
+	end
+
+	-- Рух вправо
+	if action_id == hash("right") then
+		if action.pressed or action.repeated then
+			self.input.x = 1
+			msg.post("ground/controller#ground", "set_speed", { speed = self.speed })
+			msg.post("controller#controller", "set_speed", { speed = self.speed })
+		elseif action.released then
+			self.input.x = 0
+			msg.post("ground/controller#ground", "set_speed", { speed = 0 })
+			msg.post("controller#controller", "set_speed", { speed = self.speed })
+		end
+	end
+
+	-- Перевірка, чи є рух
+	if vmath.length(self.input) > 0 then
+		self.moving = true
+		self.dir = vmath.normalize(self.input)
+	else
+		self.moving = false
+	end
+end
+
