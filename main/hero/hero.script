@@ -33,7 +33,7 @@ local function update_animation(self)
 	-- make sure the right animation is playing
 	if self.ground_contact then
 		play_animation(self, hash("run"))
-	else
+	elseif not self.ground_contact then
 		play_animation(self, hash("hoverboard"))
 	end
 end
@@ -81,7 +81,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash('reset') then
-		print('герой отримав ресет')
+		-- print('герой отримав ресет')
 		self.velocity = vmath.vector3()
 		self.correction = vmath.vector3()
 		self.ground_contact = false
@@ -91,15 +91,9 @@ function on_message(self, message_id, message, sender)
 		msg.post("#collisionobject", "enable")
 		-- print(go.get_id("#collisionobject"))
 	elseif message_id == hash("contact_point_response") then
-		-- print("Received contact_point_response from:", sender)
-		-- print("Message details:", message)
-		-- check if we received a contact point message
 		if message.group == hash("danger") then
 			-- Die and restart
-			print("Danger detected from:", sender, 'який має ід: ', message.other_id)
-			print('повідомлення отримав, має відключитись коліженобджект')
 			play_animation(self, hash("death"))
-			-- print(go.get_id("#collisionobject"))
 			msg.post("#collisionobject", "disable")
 			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
 			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,
@@ -110,6 +104,10 @@ function on_message(self, message_id, message, sender)
 		elseif message.group == hash("geometry") then
 			handle_geometry_contact(self, message.normal, message.distance)
 		end
+	end
+	if message_id == hash('not_move') then
+		print('отримав повідомлення not_move')
+	play_animation(self, hash("idle"))
 	end
 end
 

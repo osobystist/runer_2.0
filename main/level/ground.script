@@ -5,7 +5,14 @@ local pieces = { "ground_1", "ground_2", "ground_3",
 local dir = 'right'
 
 function init(self) -- <2>
-	self.speed = 360  -- Speed in pixels/s
+	self.speed = 0
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("set_speed") then -- <1>
+		self.speed = message.speed -- <2>
+		print('speed = ', self.speed)
+	end
 end
 
 function update(self, dt) -- <3>
@@ -21,11 +28,7 @@ function update(self, dt) -- <3>
 end
 end
 
-function on_message(self, message_id, message, sender)
-	if message_id == hash("set_speed") then -- <1>
-		self.speed = message.speed -- <2>
-	end
-end
+
 --цей скрип в циклі фор перебирає елементи з таблиці шматочки за допомогою ipairs(pieces) записує у змінну р елементи 
 --таблиці pieces. Поті встановлюється положення кожного елемента (в змінній р) за допомогою local pos = go.get_position(p)
 -- перевіряється, чи не вийшов елемент за межі екрану і якщо вийшов, повертаємо його в початок екрану._G

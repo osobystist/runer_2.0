@@ -4,7 +4,7 @@ components {
 }
 components {
   id: "hero_moove"
-  component: "/main/hero/hero_moove.script"
+  component: "/main/hero/hero_move.script"
 }
 embedded_components {
   id: "spinemodel"
